@@ -55,7 +55,8 @@ def main():
         print("\n===== LIBRARY MENU =====")
         print("1. Add Book")
         print("2. View Books")
-        print("3. Exit")
+        print("3. Search Books")
+        print("4. Exits")
 
         choice = input("Choose an option: ")
 
@@ -70,11 +71,13 @@ def main():
                 for i, book in enumerate(library, 1):
                     print(f"{i}. {book['title']} - {book['author']} (Available: {book['is_available']})")
 
-        elif choice == "3":
+        elif choice == "4":
             print("Exiting...")
             break
         elif choice == "2":
             view_books()
+        elif choice == "3":
+            search_book()
 
         else:
             print("Invalid option. Try again.")
@@ -89,5 +92,19 @@ def view_books():
             available = "Yes" if book['is_available'] else "No"
             print(f"{i}. Title: {title} | Author: {author} | Available: {available}")
 
+def search_book():
+    query = input("Enter keyword to search: ").lower()
+
+    found = False
+    print("\n--- Search Results ---")
+
+    for book in library:
+        if query in book['title'].lower():  # case-insensitive search
+            found = True
+            available = "Yes" if book["is_available"] else "No"
+            print(f"Title: {book['title']} | Author: {book['author']} | Available: {available}")
+
+    if not found:
+        print("No matching books found.")
 if __name__ == "__main__":
     main()
