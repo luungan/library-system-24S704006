@@ -73,10 +73,21 @@ def main():
         elif choice == "3":
             print("Exiting...")
             break
+        elif choice == "2":
+            view_books()
 
         else:
             print("Invalid option. Try again.")
-
+def view_books():
+    if not library:
+        print("Library is empty!")
+    else:
+        print("\n--- Book List ---")
+        for i, book in enumerate(library, 1):
+            title = book['title']
+            author = book['author']
+            available = "Yes" if book['is_available'] else "No"
+            print(f"{i}. Title: {title} | Author: {author} | Available: {available}")
 
 if __name__ == "__main__":
     main()
